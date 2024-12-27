@@ -1,17 +1,24 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../connection/Login";
 import axios from "axios";
+
 function Conferences() {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState("Tous");
+  const { userId } = useContext(AuthContext);
+  const [filter] = useState("Tous");
   const [loading, setLoading] = useState(false);
-  const [conferences,setConferences]=useState([]);
+  const [conferences, setConferences] = useState([]);
+  const [myConferences, setMyConferences] = useState([]);
+  const [showMyConferences, setShowMyConferences] = useState(false);
   const [error, setError] = useState(null);
+
   const imgUrl =
     "https://www.namic.org/wp-content/uploads/2024/10/mc_1072x600_v2-1-1200x674.jpg";
 
   useEffect(() => {
     const fetchConferences = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           "http://localhost:8080/api/conferences",
@@ -22,61 +29,79 @@ function Conferences() {
           }
         );
         setConferences(response.data);
-        setLoading(false);
       } catch (error) {
         setError("Erreur lors du chargement des conférences");
-        setLoading(false);
         console.error("Erreur:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchConferences();
   }, []);
 
-  const filterConferences = (status) => {
-    setFilter(status);
+  const fetchMyConferences = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/conferences/my-conferences?userId=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setMyConferences(response.data);
+      setShowMyConferences(true);
+    } catch (error) {
+      setError("Erreur lors du chargement de vos conférences");
+      console.error("Erreur:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleShowAllConferences = () => {
+    setShowMyConferences(false);
   };
 
   const handleConferenceClick = (idConference) => {
     navigate(`/conference/${idConference}`);
   };
-  // const handleEditConference = (idConference) => {
-  //   navigate(`/edit-conference/${idConference}`);
-  // };
 
-  const filteredConferences =
-    filter === "Tous"
-      ? conferences
-      : conferences.filter((conf) => conf.statut === filter);
+  const getFilteredConferences = () => {
+    const confsToFilter = showMyConferences ? myConferences : conferences;
+    return filter === "Tous"
+      ? confsToFilter
+      : confsToFilter.filter((conf) => conf.status === filter);
+  };
 
   if (loading) return <div>Chargement...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="conferences-container">
-      <h1
-        style={{
-          textAlign: "start",
-          color: "var(--primary-color)",
-        }}
-      >
+      <h1 style={{ textAlign: "start", color: "var(--primary-color)" }}>
         Liste des Conférences
       </h1>
       <br />
       <div className="conference-filters">
-        {["Tous", "Ouverte", "Fermée", "Annulée"].map((status) => (
-          <button
-            key={status}
-            className={`filter-btn ${filter === status ? "active" : ""}`}
-            onClick={() => filterConferences(status)}
-          >
-            {status}
-          </button>
-        ))}
+        <button
+          className={`filter-btn ${!showMyConferences ? "active" : ""}`}
+          onClick={handleShowAllConferences}
+        >
+          Toutes les conférences
+        </button>
+        <button
+          className={`filter-btn ${showMyConferences ? "active" : ""}`}
+          onClick={fetchMyConferences}
+        >
+          Mes conférences
+        </button>
       </div>
 
       <div className="conference-grid">
-        {filteredConferences.map((conference) => (
+        {getFilteredConferences().map((conference) => (
           <div key={conference.id} className="conference-card">
             <img
               src={imgUrl}
@@ -84,10 +109,6 @@ function Conferences() {
               className="conference-image"
               loading="lazy"
             />
-            {/* className={`statut-badge ${conference.statuts.toLowerCase()}`} */}
-            {/* <div>
-              {conference.statuts}
-            </div> */}
             <div className="conference-info">
               <h2>{conference.title}</h2>
               <p>{conference.theme}</p>
@@ -106,17 +127,6 @@ function Conferences() {
               >
                 Voir les Détails
               </button>
-              {/* {roles.includes("Éditeur") && (
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <button
-                    onClick={() => handleEditConference(conference.id)}
-                    className="btn-edit"
-                  >
-                    Éditer
-                  </button>
-                  <button className="btn-supp"> Supprimer</button>
-                </div>
-              )} */}
             </div>
           </div>
         ))}

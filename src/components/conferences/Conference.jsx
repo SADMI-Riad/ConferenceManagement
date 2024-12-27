@@ -9,12 +9,12 @@ function Conference() {
   const navigate = useNavigate();
   const { connected, userId } = useContext(AuthContext);
   const [conference, setConference] = useState(null);
+  const [userRoles, setUserRoles] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
   const [loading, setLoading] = useState(true);
   const [showRoleModal, setShowRoleModal] = useState(false);
   const [error, setError] = useState(null);
   const ref = `/conference/${idConference}`;
-
   useEffect(() => {
     const fetchConference = async () => {
       try {
@@ -29,9 +29,21 @@ function Conference() {
       }
     };
 
+    const fetchUserRoles = async () => {
+      if (connected && userId) {
+        try {
+          const response = await axios.get(
+            `http://localhost:8080/api/conferences/${idConference}/${userId}`
+          );
+          setUserRoles(response.data);
+        } catch (error) {
+          console.error("Erreur lors de la récupération des rôles:", error);
+        }
+      }
+    };
     fetchConference();
-  }, [idConference]);
-
+    fetchUserRoles();
+  }, [idConference, userId, connected]);
   if (loading) return <div>Chargement...</div>;
   if (error) return <div>{error}</div>;
   if (!conference)
@@ -43,6 +55,25 @@ function Conference() {
   const handleListeSoumissions = () => {
     navigate(`/liste_soumissions/${idConference}`);
   };
+  const handleConferenceDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/api/conferences/${idConference}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        navigate("/conferences");
+      }
+    } catch (error) {
+      setError("Erreur lors de la suppression de la conférence");
+      console.error("Erreur:", error);
+    }
+  };
+
   const handleRoleAssignment = async () => {
     try {
       await axios.post(
@@ -56,6 +87,7 @@ function Conference() {
         }
       );
       setShowRoleModal(false);
+      window.location.reload();
     } catch (error) {
       setError("Erreur lors de l'attribution du rôle");
     }
@@ -87,9 +119,11 @@ function Conference() {
         </button>
         {connected ? (
           <div className="btn-div">
-            <button className="btn-register" onClick={handleRegisterClick}>
-              S'inscrire
-            </button>
+            {userRoles.includes("AUTHOR") && (
+              <button className="btn-register" onClick={handleRegisterClick}>
+                S'inscrire
+              </button>
+            )}
             <button
               className="btn-register"
               onClick={() => setShowRoleModal(true)}
@@ -124,11 +158,28 @@ function Conference() {
                 </div>
               </div>
             )}
-
-            <button className="btn-register">Voir les Evaluations</button>
-            <button className="btn-register" onClick={handleListeSoumissions}>
-              Voir les Soumessions à evaluer
-            </button>
+            {userRoles.includes("EVALUATOR") && (
+              <button className="btn-register">
+                Voir les soumissions à Évaluer
+              </button>
+            )}
+            {userRoles.includes("EDITOR") && (
+              <div style={{ display: "flex" }}>
+                <button
+                  className="btn-register"
+                  onClick={handleListeSoumissions}
+                >
+                  Voir les Soumessions
+                </button>
+                <button
+                  className="btn-register"
+                  onClick={handleConferenceDelete}
+                  style={{ backgroundColor: "red" }}
+                >
+                  Supprimé
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <button

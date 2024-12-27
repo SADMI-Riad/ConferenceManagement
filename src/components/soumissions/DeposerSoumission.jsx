@@ -11,7 +11,7 @@ function DeposerSoumission() {
   const [soumission, setSoumission] = useState({
     title: "",
     summary: "",
-    fichierPdf: null
+    fichierPdf: null,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -52,8 +52,8 @@ function DeposerSoumission() {
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -62,7 +62,7 @@ function DeposerSoumission() {
         setSoumission({
           title: "",
           summary: "",
-          fichierPdf: null
+          fichierPdf: null,
         });
 
         setTimeout(() => {
