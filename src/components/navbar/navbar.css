@@ -1,0 +1,18 @@
+.navbar
+{
+  border-top: 3px solid var(--background-color);
+}
+.navbar-links
+{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--primary-color);
+  margin-left: 20px;
+  list-style-type: none;
+  margin-top: 45px;
+}
+.navbar-links li:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -68,3 +68,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+        <div className="form-group">
+          <label>Rôle(s)</label>
+          <div className="roles-container">
+            {roleOptions.map((role) => (
+              <label key={role} className="role-label">
+                <input
+                  type="checkbox"
+                  value={role}
+                  checked={roles.includes(role)}
+                  onChange={handleRoleChange}
+                />
+                {role}
+              </label>
+            ))}
+          </div>
+          {errors.roles && (
+            <span id="rolesError" className="error-message">
+              {errors.roles}
+            </span>
+          )}
+        </div>

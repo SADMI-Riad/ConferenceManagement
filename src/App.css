@@ -1,38 +1,133 @@
-.App {
-  text-align: center;
+*
+{
+    margin: 0;
+    padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+:root {
+    --primary-color: #176B87; 
+    --secondary-color: #86B6F6; 
+    --accent-color: #B4D4FF; 
+    --error-color: #FF6B6B; 
+    --success-color: #28a745; 
+    --background-color: #EEF5FF;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition-speed: 0.3s;
   }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: #333;
+  }
+  
+
+
+.toggle-links {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.toggle-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggle-links a:hover {
+  color: #0056b3;
+}
+.no_account_btn
+{
+  color: var(--secondary-color);
+  text-align: center;
+  margin-top: 10px;
+  font-size: small;
+}
+.no_account_btn:hover
+{
+  text-decoration: underline;
+  color: var(--accent-color);
+  cursor: pointer;
+}
+.animate-link {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.authors-container {
+  /* padding: 40px; */
+  /* text-align: center; */
   display: flex;
   flex-direction: column;
+}
+
+.authors-container h1 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.authors-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.author-card {
+  border-radius: 12px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  text-align: center;
+}
+.main-author {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.5s forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation-delay: 0.1s;
+}
+.main-author:hover  {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+.rightArrowAuthor
+{
+  margin-right: 10px;
+}
+.author-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  margin-left: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.author-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+@keyframes slideUp {
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }

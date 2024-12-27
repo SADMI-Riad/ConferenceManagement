@@ -1,0 +1,509 @@
+
+.conferences-container {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .conference-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .filter-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .filter-btn.active {
+    background-color: var(--primary-color);
+  }
+  
+  .filter-btn:hover {
+    background-color: var(--accent-color);
+  }
+  
+  .conference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  .conference-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .conference-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .conference-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #f1f1f1;
+  }
+  
+  .statut-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .statut-badge.ouverte { 
+    background-color: #28a745; 
+    color: white;
+  }
+  
+  .statut-badge.fermee { 
+    background-color: #dc3545; 
+    color: white;
+  }
+  
+  .statut-badge.annulee { 
+    background-color: #6c757d; 
+    color: white;
+  }
+  
+  .conference-info {
+    padding: 20px;
+  }
+  
+  .conference-info h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .conference-info p {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+  }
+  
+  .btn-details {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-details:hover {
+    background-color: #2980b9;
+  }
+
+
+@media (max-width: 768px) {
+    .conference-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .conference-filters {
+      flex-wrap: wrap;
+    }
+  }
+  .conference-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+  }
+  
+  .conference-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .conference-info h2 {
+    margin-bottom: 10px;
+    min-height: 50px;
+  }
+  
+  .conference-info p {
+    flex-grow: 1; 
+  }
+  .btn-edit {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+  }
+  .btn-supp {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+  }
+  
+  .btn-edit:hover {
+    background-color: var(--primary-color);
+  }
+  
+  
+  .btn-details {
+    margin-top: auto; 
+    align-self: stretch; 
+  }
+  
+  .creation-conference-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+  }
+  
+  .conference-creation-header h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+    position: relative;
+  }
+  
+  .conference-creation-header h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .conference-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .conference-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .conference-form input,
+  .conference-form select,
+  .conference-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .conference-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .conference-form .form-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .conference-form .form-row .form-group {
+    flex: 1;
+  }
+  
+  .btn-create-conference {
+    padding: 12px 200px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px; 
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-create-conference:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+  }
+  .conference-details-container1 {
+    max-width: 700px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .conference-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .conference-header h1 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin: 0;
+  }
+  
+  .conference-status {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+  
+  .conference-status.ouverte {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .conference-status.fermee {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .conference-status.annulee {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .conference-description {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .conference-description p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  
+  .conference-dates {
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-align: right;
+  }
+  
+  .conference-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .btn-register, .btn-back {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-register {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .btn-register:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+  }
+  
+  .btn-back {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .btn-back:hover {
+    background-color: #495057;
+    transform: translateY(-3px);
+  }
+.edit-conference-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.edit-conference-container h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+  font-size: 2rem;
+  position: relative;
+}
+
+.edit-conference-container h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: var(--secondary-color);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.edit-conference-container .form-group {
+  margin-bottom: 20px;
+}
+
+.edit-conference-container label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.edit-conference-container input,
+.edit-conference-container select,
+.edit-conference-container textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.edit-conference-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.edit-conference-container .btn-save {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px; 
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+}
+
+.edit-conference-container .btn-save:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.btn-div 
+{
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  gap: 20px;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.role-select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}

@@ -1,0 +1,30 @@
+.header {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-img
+  {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+  .img-div
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 40px;
+  }
+  .img-div:hover
+  {
+    cursor: pointer;
+  }
+  .header , .date {
+    font-weight: bold;
+  }

@@ -1,0 +1,514 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: backgroundFade 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes backgroundFade {
+    0% {
+      background-color: #EEF5FF;
+    }
+    100% {
+      background-color: #DDEEFF;
+    }
+  }
+  
+  .signup-box {
+    background-color: #FFFFFF;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 500px;
+    animation: formSlideIn 1s ease-out;
+    transform: translateY(-20px);
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes formSlideIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .signup-box h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2em;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  
+  .signup-box h1::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+    transition: width var(--transition-speed) ease-in-out;
+  }
+  
+  .signup-box h1:hover::after {
+    width: 70px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .signup-box label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .signup-box input[type="text"],
+  .signup-box input[type="email"],
+  .signup-box input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  }
+  
+  .signup-box input[type="text"]:focus,
+  .signup-box input[type="email"]:focus,
+  .signup-box input[type="password"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(23, 107, 135, 0.2);
+    outline: none;
+  }
+  
+  .roles-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .role-label {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-weight: normal;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
+  }
+  
+  .role-label:hover {
+    color: var(--secondary-color);
+  }
+  
+  .role-label input {
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+  }
+  
+  .input-error {
+    border-color: var(--error-color);
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.2);
+  }
+  
+  .error-message {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 5px;
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+  }
+  
+  .backend-error {
+    text-align: center;
+    color: var(--error-color);
+    margin-bottom: 15px;
+  }
+  
+  .success-message {
+    text-align: center;
+    color: var(--success-color);
+    font-size: 16px;
+    margin-bottom: 15px;
+    animation: successFadeIn 1s ease-in-out;
+  }
+  
+  @keyframes successFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .signup-box button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--secondary-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+  }
+  
+  .signup-box button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-box button:active {
+    background-color: var(--primary-color);
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  @media (max-width: 768px) {
+    .signup-box {
+      padding: 30px 25px;
+    }
+  
+    .signup-box h1 {
+      font-size: 1.8em;
+    }
+  
+    .signup-box input[type="text"],
+    .signup-box input[type="email"],
+    .signup-box input[type="password"] {
+      font-size: 15px;
+      padding: 10px 12px;
+    }
+  
+    .signup-box button {
+      font-size: 15px;
+      padding: 12px;
+    }
+  
+    .roles-container {
+      gap: 10px;
+    }
+  
+    .error-message {
+      font-size: 13px;
+    }
+  
+    .success-message {
+      font-size: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .signup-box {
+      padding: 25px 20px;
+    }
+  
+    .signup-box h1 {
+      font-size: 1.5em;
+    }
+  
+    .signup-box input[type="text"],
+    .signup-box input[type="email"],
+    .signup-box input[type="password"] {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  
+    .signup-box button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .roles-container {
+      flex-direction: column;
+    }
+  
+    .role-label {
+      font-size: 14px;
+    }
+  
+    .error-message {
+      font-size: 12px;
+    }
+  
+    .success-message {
+      font-size: 14px;
+    }
+  }
+
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: backgroundFade 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes backgroundFade {
+    0% {
+      background-color: #EEF5FF;
+    }
+    100% {
+      background-color: #DDEEFF;
+    }
+  }
+  
+  .login-box {
+    background-color: #FFFFFF;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    animation: formSlideIn 1s ease-out;
+    transform: translateY(-20px);
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes formSlideIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .login-box h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2em;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  
+  .login-box h1::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+    transition: width var(--transition-speed) ease-in-out;
+  }
+  
+  .login-box h1:hover::after {
+    width: 70px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .login-box label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .login-box input[type="email"],
+  .login-box input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  }
+  
+  .login-box input[type="email"]:focus,
+  .login-box input[type="password"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(23, 107, 135, 0.2);
+    outline: none;
+  }
+  
+  .input-error {
+    border-color: var(--error-color);
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.2);
+  }
+  
+  .error-message {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 5px;
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+  }
+  
+  .backend-error {
+    text-align: center;
+    color: var(--error-color);
+    margin-bottom: 15px;
+  }
+  
+  .success-message {
+    text-align: center;
+    color: var(--success-color);
+    font-size: 16px;
+    margin-bottom: 15px;
+    animation: successFadeIn 1s ease-in-out;
+  }
+  
+  @keyframes successFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .login-box button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--secondary-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+  }
+  
+  .login-box button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-box button:active {
+    background-color: var(--primary-color);
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  @media (max-width: 768px) {
+    .login-box {
+      padding: 30px 25px;
+    }
+  
+    .login-box h1 {
+      font-size: 1.8em;
+    }
+  
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      font-size: 15px;
+      padding: 10px 12px;
+    }
+  
+    .login-box button {
+      font-size: 15px;
+      padding: 12px;
+    }
+  
+    .error-message {
+      font-size: 13px;
+    }
+  
+    .success-message {
+      font-size: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .login-box {
+      padding: 25px 20px;
+    }
+  
+    .login-box h1 {
+      font-size: 1.5em;
+    }
+  
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  
+    .login-box button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .error-message {
+      font-size: 12px;
+    }
+  
+    .success-message {
+      font-size: 14px;
+    }
+  }
+  
+  /* Animation d'apparition */
+  @keyframes backgroundFade {
+    0% {
+      background-color: #EEF5FF;
+    }
+    100% {
+      background-color: #DDEEFF;
+    }
+  }
+  
+  @keyframes formSlideIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes successFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+.app-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.app-container.login-view {
+  transform: translateX(0);
+}
+
+.app-container.signup-view {
+  transform: translateX(-100%);
+}

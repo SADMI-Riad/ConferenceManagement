@@ -1,0 +1,88 @@
+{
+  "conferences": [
+    {
+      "idConference": 1,
+      "nom": "Conférence sur l'Intelligence Artificielle",
+      "description": "Une conférence sur les dernières avancées en Intelligence Artificielle et Machine Learning.",
+      "dateDebut": "2024-05-01",
+      "dateFin": "2024-05-05",
+      "statut": "Ouverte",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfmSRBjDF01hSR8H5OFRIMPeJqDsDcNT8KIA&s",
+      "id": "f57f"
+    },
+    {
+      "idConference": 2,
+      "nom": "Conférence sur la Cybersécurité",
+      "description": "Discussions autour des meilleures pratiques en matière de cybersécurité et de protection des données.",
+      "dateDebut": "2024-06-10",
+      "dateFin": "2024-06-12",
+      "statut": "Fermée",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfmSRBjDF01hSR8H5OFRIMPeJqDsDcNT8KIA&s",
+      "id": "6fbf"
+    },
+    {
+      "idConference": 3,
+      "nom": "Conférence sur les Énergies Renouvelables",
+      "description": "Exploration des nouvelles technologies dans le domaine des énergies renouvelables.",
+      "dateDebut": "2024-07-15",
+      "dateFin": "2024-07-18",
+      "statut": "Ouverte",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfmSRBjDF01hSR8H5OFRIMPeJqDsDcNT8KIA&s",
+      "id": "ec51"
+    },
+    {
+      "idConference": 4,
+      "nom": "Conférence sur le Développement Durable",
+      "description": "Discussions sur les stratégies de développement durable et l'impact environnemental.",
+      "dateDebut": "2024-08-20",
+      "dateFin": "2024-08-22",
+      "statut": "Annulée",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfmSRBjDF01hSR8H5OFRIMPeJqDsDcNT8KIA&s",
+      "id": "dc9a"
+    },
+    {
+      "idConference": 5,
+      "nom": "Conférence sur l'Blockchain",
+      "description": "Exploration des applications de la blockchain dans différents secteurs industriels.",
+      "dateDebut": "2024-09-01",
+      "dateFin": "2024-09-04",
+      "statut": "Ouverte",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfmSRBjDF01hSR8H5OFRIMPeJqDsDcNT8KIA&s",
+      "id": "3483"
+    },
+    {
+      "id": "7896",
+      "nom": "Présentation des different projet des pfes",
+      "description": "présentations des themes disponibles pour les pfes internes et externes ",
+      "dateDebut": "2025-01-01",
+      "dateFin": "2025-02-14",
+      "statut": "Ouverte",
+      "createdAt": "2024-12-20T13:10:29.456Z"
+    },
+    {
+      "id": "a39a",
+      "nom": "intelligence artificiel à l'usthb",
+      "description": "parcourir le monde de l'ia",
+      "dateDebut": "2025-04-02",
+      "dateFin": "2025-03-05",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfmSRBjDF01hSR8H5OFRIMPeJqDsDcNT8KIA&s",
+      "statut": "Ouverte",
+      "createdAt": "2024-12-20T13:12:38.166Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "b7e6",
+      "name": "riad",
+      "email": "sadriad01@gmail.com",
+      "password": "riadriad",
+      "roles": [
+        "Auteur",
+        "Éditeur",
+        "Évaluateur"
+      ],
+      "createdAt": "2024-12-20T13:24:18.664Z"
+    }
+  ],
+  "soumissions": []
+}

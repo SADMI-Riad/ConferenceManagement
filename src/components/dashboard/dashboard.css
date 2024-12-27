@@ -1,0 +1,85 @@
+.dashboard-container {
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .dashboard_H1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-align: start;
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 30px;
+  }
+  
+  .dashboard-card {
+    padding: 20px;
+    border-radius: 17px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 160px;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dashboard-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .dashboard-card .stat-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: auto;
+    color: white; 
+  }
+  
+  .dashboard-card .stat-value span {
+    font-size: 1.5rem;
+    opacity: 0.8;
+  }
+  
+  .dashboard-card .stat-description {
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+  
+  .dashboard-card:nth-child(1) {
+    background: linear-gradient(135deg, #176B87, #0f4f61, #2a8b96, #86B6F6); 
+  }
+  
+  .dashboard-card:nth-child(2) {
+    background: linear-gradient(135deg, #86B6F6, #A3C6F9, #4A90E2, #176B87); 
+  }
+  
+  .dashboard-card:nth-child(3) {
+    background: linear-gradient(135deg, #B4D4FF, #A3D3FF, #50B1D3, #1A8F9C); 
+  }
+  
+  .dashboard-card:nth-child(4) {
+    background: linear-gradient(135deg, #1A8F9C, #50B1D3, #86B6F6, #B4D4FF); 
+  }
+  
+  .dashboard-card:nth-child(5) {
+    background: linear-gradient(135deg, #50B1D3, #B4D4FF, #1A8F9C, #176B87);
+  }
+  
+  .dashboard-card:nth-child(6) {
+    background: linear-gradient(135deg, #1A8F9C, #A3D3FF, #176B87, #A3C6F9);
+  }

@@ -1,0 +1,290 @@
+.soumission-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+  }
+  
+  .soumission-header h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+    position: relative;
+  }
+  
+  .soumission-header h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .soumission-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .soumission-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .soumission-form input,
+  .soumission-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .soumission-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .soumission-form input[type="file"] {
+    border: 2px dashed var(--secondary-color);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .btn-soumettre {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+  }
+  
+  .btn-soumettre:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+  }
+  
+  .soumissions-container {
+    padding: 20px;
+    background-color: var(--background-color);
+  }
+  
+  .soumissions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .soumissions-header h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+  }
+  
+  .soumissions-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .soumission-ligne {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .soumission-ligne:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+  .soumission-titre {
+    flex-grow: 1;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-right: 20px;
+  }
+  
+  .soumission-statut {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 15px;
+    text-transform: uppercase;
+  }
+  
+  .statut-acceptée { 
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+  }
+  
+  .statut-rejetée { 
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+  }
+  
+  .statut-enrévision { 
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+  }
+  
+  .btn-supprimer {
+    background-color: var(--error-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-supprimer:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+  .soumission-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 20px;
+  }
+  
+  .soumission-titre {
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  
+  .soumission-conference, 
+  .soumission-auteur, 
+  .soumission-date {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .btn-evaluer {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-evaluer:hover {
+    background-color: var(--primary-color);
+  }
+  .evaluation-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .evaluation-container h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+    position: relative;
+  }
+  
+  .evaluation-container h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+  
+  .soumission-details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .soumission-details h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+  
+  .evaluation-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .evaluation-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .evaluation-form input,
+  .evaluation-form textarea,
+  .evaluation-form select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .evaluation-form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .btn-details {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-details:hover {
+    background-color: var(--primary-color);
+  }
+  .btn-telecharger {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: var(--primary-color);
+    color: white;
+  }
+  .soumission-actions {
+    display: flex;
+    gap: 10px;
+  }
