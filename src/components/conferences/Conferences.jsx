@@ -43,8 +43,8 @@ function Conferences() {
   const fetchMyConferences = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/conferences/my-conferences?userId=${userId}`,
+      const response = await axios.get( 
+        `http://localhost:8080/api/conferences/my-conferences?userId=${userId}`, 
         {
           headers: {
             "Content-Type": "application/json",

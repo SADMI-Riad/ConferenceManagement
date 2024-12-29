@@ -124,13 +124,15 @@ function Conference() {
                 S'inscrire
               </button>
             )}
-            <button
-              className="btn-register"
-              onClick={() => setShowRoleModal(true)}
-            >
-              Choisir Rôles pour cette conference
-            </button>
-
+            {(!userRoles.includes("AUTHOR") ||
+              !userRoles.includes("EVALUATOR")) && (
+              <button
+                className="btn-register"
+                onClick={() => setShowRoleModal(true)}
+              >
+                Choisir Rôles pour cette conference
+              </button>
+            )}
             {showRoleModal && (
               <div className="modal-overlay">
                 <div className="modal-content">
@@ -164,7 +166,7 @@ function Conference() {
               </button>
             )}
             {userRoles.includes("EDITOR") && (
-              <div style={{ display: "flex" }}>
+              <div className="editor-actions">
                 <button
                   className="btn-register"
                   onClick={handleListeSoumissions}
@@ -172,11 +174,10 @@ function Conference() {
                   Voir les Soumessions
                 </button>
                 <button
-                  className="btn-register"
+                  className="btn-register btn-delete"
                   onClick={handleConferenceDelete}
-                  style={{ backgroundColor: "red" }}
                 >
-                  Supprimé
+                  Supprimer
                 </button>
               </div>
             )}
