@@ -6,6 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 export const AuthContext = createContext({
   connected: localStorage.getItem("user") !== null,
   userId: JSON.parse(localStorage.getItem("user"))?.id || null,
+  Nom : JSON.parse(localStorage.getItem("user"))?.Nom || null
 });
 
 function Login() {
@@ -59,7 +60,8 @@ function Login() {
         const userData = response.data;
         localStorage.setItem("user", JSON.stringify({
           id: userData.id,
-          connected: true
+          connected: true,
+          Nom : userData.fullName
         }));
   
         setSuccessMessage("Connexion réussie!");

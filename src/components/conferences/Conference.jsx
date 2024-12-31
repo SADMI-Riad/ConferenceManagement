@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../connection/Login";
 import axios from "axios";
 import "./Conference.css";
-
 function Conference() {
   const { idConference } = useParams();
   const navigate = useNavigate();
@@ -13,6 +12,7 @@ function Conference() {
   const [selectedRole, setSelectedRole] = useState("");
   const [loading, setLoading] = useState(true);
   const [showRoleModal, setShowRoleModal] = useState(false);
+  const [showStatusModal, setShowStatusModal] = useState(false);
   const [error, setError] = useState(null);
   const ref = `/conference/${idConference}`;
   useEffect(() => {
@@ -55,22 +55,15 @@ function Conference() {
   const handleListeSoumissions = () => {
     navigate(`/liste_soumissions/${idConference}`);
   };
-  const handleConferenceDelete = async () => {
+  const handleConferenceStatusChange = async (status) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:8080/api/conferences/${idConference}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      await axios.put(
+        `http://localhost:8080/api/conferences/${idConference}/status?status=${status}`
       );
-      if (response.status === 200) {
-        navigate("/conferences");
-      }
-    } catch (error) {
-      setError("Erreur lors de la suppression de la conférence");
-      console.error("Erreur:", error);
+      window.location.reload();
+      setShowStatusModal(false);
+    } catch (err) {
+      setError("Erreur lors du changement de statut");
     }
   };
 
@@ -94,107 +87,181 @@ function Conference() {
   };
 
   return (
-    <div className="conference-details-container1">
-      <div className="conference-header">
-        <h1>{conference.title}</h1>
-        <span
-          className={`conference-status ${conference.status?.toLowerCase()}`}
-        >
-          {conference.status}
-        </span>
-      </div>
-
-      <div className="conference-description">
-        <p>{conference.theme}</p>
-        <div className="conference-dates">
-          <strong>Dates :</strong>{" "}
-          {new Date(conference.startDate).toLocaleDateString()} -{" "}
-          {new Date(conference.endDate).toLocaleDateString()}
+    <div>
+      <div className="conference-details-container1">
+        <div className="conference-header">
+          <h1>{conference.title}</h1>
+          <span
+            className={`conference-status ${conference.status?.toLowerCase()}`}
+          >
+            {conference.status}
+          </span>
         </div>
-      </div>
 
-      <div className="conference-actions">
-        <button className="btn-back" onClick={() => navigate("/conferences")}>
-          Retour à la Liste
-        </button>
-        {connected ? (
-          <div className="btn-div">
-            {userRoles.includes("AUTHOR") && (
-              <button className="btn-register" onClick={handleRegisterClick}>
-                S'inscrire
-              </button>
-            )}
-            {(!userRoles.includes("AUTHOR") ||
-              !userRoles.includes("EVALUATOR")) && (
-              <button
-                className="btn-register"
-                onClick={() => setShowRoleModal(true)}
-              >
-                Choisir Rôles pour cette conference
-              </button>
-            )}
-            {showRoleModal && (
-              <div className="modal-overlay">
-                <div className="modal-content">
-                  <h2>Choisir un Rôle</h2>
-                  <select
-                    value={selectedRole}
-                    onChange={(e) => setSelectedRole(e.target.value)}
-                    className="role-select"
+        <div className="conference-description">
+          <p>{conference.theme}</p>
+          <div className="conference-dates">
+            <strong>Dates :</strong>{" "}
+            {new Date(conference.startDate).toLocaleDateString()} -{" "}
+            {new Date(conference.endDate).toLocaleDateString()}
+          </div>
+        </div>
+
+        <div className="conference-actions">
+          <button className="btn-back" onClick={() => navigate("/conferences")}>
+            Retour à la Liste
+          </button>
+          {connected ? (
+            <div className="btn-div">
+              {userRoles.includes("AUTHOR") &&
+                !(
+                  conference.status === "CLOSED" ||
+                  conference.status === "COMPLETED"
+                ) && (
+                  <button
+                    className="btn-register"
+                    onClick={handleRegisterClick}
                   >
-                    <option value="">Sélectionner un rôle</option>
-                    <option value="AUTHOR">Auteur</option>
-                    <option value="EVALUATOR">Évaluateur</option>
-                  </select>
-                  <div className="modal-buttons">
-                    <button
-                      onClick={handleRoleAssignment}
-                      disabled={!selectedRole || loading}
-                    >
-                      Confirmer
-                    </button>
-                    <button onClick={() => setShowRoleModal(false)}>
-                      Annuler
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-            {userRoles.includes("EVALUATOR") && (
-              <button className="btn-register">
-                Voir les soumissions à Évaluer
-              </button>
-            )}
-            {userRoles.includes("EDITOR") && (
-              <div className="editor-actions">
+                    S'inscrire
+                  </button>
+                )}
+              {userRoles.includes("AUTHOR") &&
+                !(
+                  conference.status === "CLOSED" ||
+                  conference.status === "COMPLETED"
+                ) && (
+                  <button
+                    className="btn-register"
+                    onClick={() =>
+                      navigate(`/mes_soumissions/${userId}/${idConference}`)
+                    }
+                  >
+                    voir mes soumissions
+                  </button>
+                )}
+              {(!userRoles.includes("AUTHOR") ||
+                !userRoles.includes("EVALUATOR")) && (
                 <button
                   className="btn-register"
-                  onClick={handleListeSoumissions}
+                  onClick={() => setShowRoleModal(true)}
                 >
-                  Voir les Soumessions
+                  Choisir Rôles pour cette conference
                 </button>
-                <button
-                  className="btn-register btn-delete"
-                  onClick={handleConferenceDelete}
-                >
-                  Supprimer
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <button
-            className="btn-back"
-            onClick={() =>
-              navigate("/login", {
-                state: { from: ref },
-              })
-            }
-          >
-            Se connecter
-          </button>
-        )}
+              )}
+              {showRoleModal && (
+                <div className="modal-overlay">
+                  <div className="modal-content">
+                    <h2>Choisir un Rôle</h2>
+                    <select
+                      value={selectedRole}
+                      onChange={(e) => setSelectedRole(e.target.value)}
+                      className="role-select"
+                    >
+                      <option value="">Sélectionner un rôle</option>
+                      <option value="AUTHOR">Auteur</option>
+                      <option value="EVALUATOR">Évaluateur</option>
+                    </select>
+                    <div className="modal-buttons">
+                      <button
+                        onClick={handleRoleAssignment}
+                        disabled={!selectedRole || loading}
+                      >
+                        Confirmer
+                      </button>
+                      <button onClick={() => setShowRoleModal(false)}>
+                        Annuler
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {userRoles.includes("EVALUATOR") &&
+                !(conference.status === "COMPLETED") && (
+                  <button
+                    className="btn-register"
+                    onClick={() =>
+                      navigate(
+                        `/ListeDesSoumisisonsAEvaluer/${idConference}/${userId}`
+                      )
+                    }
+                  >
+                    Voir les soumissions à Évaluer
+                  </button>
+                )}
+              {userRoles.includes("EDITOR") && (
+                <div className="editor-actions">
+                  <button
+                    className="btn-register"
+                    onClick={handleListeSoumissions}
+                  >
+                    Voir les Soumessions des auteurs
+                  </button>
+                  <button
+                    className="btn-register"
+                    onClick={() => setShowStatusModal(true)}
+                  >
+                    Changer Status Conférence
+                  </button>
+
+                  {showStatusModal && (
+                    <div className="modal-overlay">
+                      <div className="modal-content">
+                        <h2>Choisir le nouveau statut</h2>
+                        <div className="status-buttons">
+                          <button
+                            className="btn-status"
+                            onClick={() =>
+                              handleConferenceStatusChange("CLOSED")
+                            }
+                          >
+                            Fermé
+                          </button>
+                          <button
+                            className="btn-status"
+                            onClick={() =>
+                              handleConferenceStatusChange("COMPLETED")
+                            }
+                          >
+                            Terminé
+                          </button>
+                          <button
+                            className="btn-status"
+                            onClick={() => {
+                              handleConferenceStatusChange(
+                                "OPEN_FOR_SUBMISSIONS"
+                              );
+                            }}
+                          >
+                            Ouvert
+                          </button>
+                        </div>
+                        <button
+                          className="btn-cancel"
+                          onClick={() => setShowStatusModal(false)}
+                        >
+                          Annuler
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              className="btn-back"
+              onClick={() =>
+                navigate("/login", {
+                  state: { from: ref },
+                })
+              }
+            >
+              Se connecter
+            </button>
+          )}
+        </div>
       </div>
+      <div style={{ display: "None" }}></div>
     </div>
   );
 }

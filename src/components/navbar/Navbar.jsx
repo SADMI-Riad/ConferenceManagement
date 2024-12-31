@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../connection/Login";
 import "./navbar.css";
 function Navbar() {
-  const { connected } = useContext(AuthContext);
+  const { connected, Nom, userId } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("user");
+    navigate("/");
     window.location.reload();
   };
 
@@ -32,11 +33,11 @@ function Navbar() {
                 Créer une Conference
               </li>
               <br />
-              <li onClick={() => navigate("/liste_soumissions")}>
-                Voir mes soumissions
-              </li>
-              <br />
               <li onClick={handleLogout}>Se deconnecter</li>
+              <br />
+              <li>
+                user : {Nom} L'ID : {userId}
+              </li>
             </div>
           ) : (
             <li onClick={() => navigate("/login")}>Se connecter</li>

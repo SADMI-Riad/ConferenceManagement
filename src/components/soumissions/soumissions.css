@@ -124,27 +124,34 @@
   }
   
   .soumission-statut {
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
     font-weight: bold;
-    margin-right: 15px;
+    margin-right: 5px;
     text-transform: uppercase;
-  }
+    display: inline-block;
+    line-height: 1;
+}
   
-  .statut-acceptée { 
+  .statut-accepted { 
     background-color: rgba(40, 167, 69, 0.2);
     color: #28a745;
   }
   
-  .statut-rejetée { 
+  .statut-rejected { 
     background-color: rgba(220, 53, 69, 0.2);
     color: #dc3545;
   }
   
-  .statut-enrévision { 
+  .statut-under_revision { 
     background-color: rgba(255, 193, 7, 0.2);
     color: #ffc107;
+  }
+  
+  .statut-submitted {
+    background-color: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
   }
   
   .btn-supprimer {
@@ -288,3 +295,65 @@
     display: flex;
     gap: 10px;
   }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    min-width: 400px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  
+  .evaluators-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .evaluator-btn {
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .evaluator-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .btn-evaluer {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .btn-cancel {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

@@ -12,7 +12,9 @@ import EditConference from "./components/conferences/EditConference";
 import DeposerSoumission from "./components/soumissions/DeposerSoumission";
 import ListeSoumissions from "./components/soumissions/ListeSoumissions";
 import SoumissionsAEvaluer from "./components/soumissions/SoumissionsAEvaluer";
-import EvaluationSoumission from "./components/soumissions/EvaluationSoumission";
+import EvaluationSoumission from "./components/evalutations/EvaluationSoumission";
+import EvaluationsList from "./components/evalutations/EvaluationsList";
+import MesSoumissionsConference from "./components/soumissions/MesSoumissionsConference";
 function App() {
   return (
     <Router>
@@ -36,11 +38,25 @@ function App() {
               path="/posersoumission/:idConference"
               element={<DeposerSoumission />}
             />
-            <Route path="/evaluation/:soumissionId" element={<EvaluationSoumission/>}/>
-            <Route path="/liste_soumissions/:idConference" element={<ListeSoumissions />} />
             <Route
-              path="/ListeDesSoumisisonsAEvaluer"
+              path="/evaluation/:soumId/:evaluatorId"
+              element={<EvaluationSoumission />}
+            />
+            <Route
+              path="/liste_soumissions/:idConference"
+              element={<ListeSoumissions />}
+            />
+            <Route
+              path="/ListeDesSoumisisonsAEvaluer/:conferenceId/:evaluatorId"
               element={<SoumissionsAEvaluer />}
+            />
+            <Route
+              path="/liste_des_evaluations/:submissionId"
+              element={<EvaluationsList />}
+            />
+            <Route
+              path="mes_soumissions/:authorId/:conferenceId"
+              element={<MesSoumissionsConference />}
             />
           </Route>
         </Routes>
