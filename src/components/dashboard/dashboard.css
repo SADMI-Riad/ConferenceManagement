@@ -23,10 +23,11 @@
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #176B87, #0f4f61, #2a8b96, #86B6F6); ;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: center; 
+    align-items: center;
     height: 160px;
   }
   
@@ -36,7 +37,7 @@
   }
   
   .dashboard-card h2 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     margin-bottom: 15px;
     font-weight: bold;
     text-transform: uppercase;
@@ -47,7 +48,7 @@
     font-size: 2.2rem;
     font-weight: bold;
     margin-top: auto;
-    color: white; 
+    color: black; 
   }
   
   .dashboard-card .stat-value span {
@@ -60,7 +61,7 @@
     opacity: 0.7;
   }
   
-  .dashboard-card:nth-child(1) {
+  /* .dashboard-card:nth-child(1) {
     background: linear-gradient(135deg, #176B87, #0f4f61, #2a8b96, #86B6F6); 
   }
   
@@ -82,4 +83,13 @@
   
   .dashboard-card:nth-child(6) {
     background: linear-gradient(135deg, #1A8F9C, #A3D3FF, #176B87, #A3C6F9);
+  } */
+  .stat-highlight
+  {
+    font-size: xxx-large;
   }
+.stat-number
+{
+  font-size: 4rem;
+}
+

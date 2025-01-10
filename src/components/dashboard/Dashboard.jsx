@@ -32,22 +32,18 @@ function Dashboard() {
   }, []);
   const stats = [
     {
-      title: "Total des Conférences",
       value: stat.totalConferences,
       label: "Conférences",
     },
     {
-      title: "Total des Évaluateurs",
       value: stat.totalEvaluators,
       label: "Évaluateurs",
     },
     {
-      title: "Total des Éditeurs",
       value: stat.totalEditors,
       label: "Éditeurs",
     },
     {
-      title: "Total des Auteurs",
       value: stat.totalAuthors,
       label: "Auteurs",
     },
@@ -66,13 +62,10 @@ function Dashboard() {
                 className="dashboard-card"
                 style={{ backgroundColor: stat.color }}
               >
-                <h2 style={{ color: "black" }}>{stat.title}:</h2>
-                <p>
-                  <span className="stat-value">{stat.value}</span>
-                  <span style={{ color: "black", marginLeft: "5px" }}>
-                    {stat.label}
-                  </span>
-                </p>
+                <h2 style={{ color: "white" }}>
+                  Total <span className="stat-number">{stat.value}</span>{" "}
+                  <span className="stat-label">{stat.label}</span>
+                </h2>
               </div>
             ))}
           </div>

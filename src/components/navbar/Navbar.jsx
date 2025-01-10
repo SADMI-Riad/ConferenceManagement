@@ -33,11 +33,13 @@ function Navbar() {
                 Créer une Conference
               </li>
               <br />
-              <li onClick={handleLogout}>Se deconnecter</li>
               <br />
-              <li>
-                user : {Nom} L'ID : {userId}
-              </li>
+              <div className="user_div">
+                <li onClick={handleLogout}>Se deconnecter</li>
+                <li>
+                  user : {Nom} L'ID : {userId}
+                </li>
+              </div>
             </div>
           ) : (
             <li onClick={() => navigate("/login")}>Se connecter</li>

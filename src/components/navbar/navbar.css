@@ -16,3 +16,11 @@
   cursor: pointer;
   text-decoration: underline;
 }
+.user_div
+{
+  display: flex;
+  flex-direction: column;
+  height: 65vh;
+  justify-content: end;
+  gap: 20px;
+}

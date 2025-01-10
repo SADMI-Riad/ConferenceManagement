@@ -1,30 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./Evaluation.css";
 
 function EvaluationsList() {
   const { submissionId } = useParams();
+  const navigate = useNavigate();
   const [evaluations, setEvaluations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [isAuthorEditor, setIsAuthorEditor] = useState(false);
   const userId = JSON.parse(localStorage.getItem("user")).id;
-
-  const handleStatusUpdate = useCallback(
-    async (status) => {
-      try {
-        await axios.put(
-          `http://localhost:8080/api/submissions/${submissionId}/Status?status=${status}`
-        );
-        setShowStatusModal(false);
-      } catch (err) {
-        setError("Erreur lors de la mise à jour du statut");
-      }
-    },
-    [submissionId]
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,17 +27,6 @@ function EvaluationsList() {
 
         setEvaluations(evalResponse.data);
         setIsAuthorEditor(authorEditorResponse.data);
-
-        if (authorEditorResponse.data && evalResponse.data.length > 0) {
-          const scores = evalResponse.data.map(
-            (evaluation) => evaluation.score
-          );
-          const average = scores.reduce((a, b) => a + b, 0) / scores.length;
-          const finalStatus = average >= 5 ? "ACCEPTED" : "REJECTED";
-
-          await handleStatusUpdate(finalStatus);
-        }
-
         setLoading(false);
       } catch (err) {
         setError("Erreur lors du chargement des données");
@@ -59,7 +35,19 @@ function EvaluationsList() {
     };
 
     fetchData();
-  }, [submissionId, userId, handleStatusUpdate]);
+  }, [submissionId, userId]);
+
+  const handleStatusUpdate = async (status) => {
+    try {
+      await axios.put(
+        `http://localhost:8080/api/submissions/${submissionId}/Status?status=${status}&userId=${userId}`
+      );
+      navigate("/conferences");
+      setShowStatusModal(false);
+    } catch (err) {
+      setError("Erreur lors de la mise à jour du statut");
+    }
+  };
 
   if (loading) return <div>Chargement...</div>;
   if (error) return <div className="error-message">{error}</div>;
@@ -107,16 +95,23 @@ function EvaluationsList() {
             </div>
           ))
         )}
-        {!isAuthorEditor && (
-          <div className="div-des">
+        <div className="div-des">
+          {isAuthorEditor && evaluations.length > 0 ? (
+            <button
+              className="des-btn auto-btn"
+              onClick={() => handleStatusUpdate("ACCEPTED")}
+            >
+              Calculer automatiquement
+            </button>
+          ) : (
             <button
               className="des-btn"
               onClick={() => setShowStatusModal(true)}
             >
               Mettre la décision finale
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {showStatusModal && !isAuthorEditor && (
