@@ -1,92 +1,105 @@
-# Getting Started with Create React App
+# Conference Management Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A front‑to‑back solution that streamlines the academic‑conference workflow:
+Call‑for‑papers → Submission → Peer Review → Editorial Decision → Publication.
 
-## Available Scripts
+> **Front‑end** and **Back‑end** live in **two distinct repositories**.  
+> This README only covers the **React front‑end**; the Spring Boot back‑end (H2 database) is documented in its own repo.
 
-In the project directory, you can run:
+<p align="center">
+  <img src="./screenshots/conference_list.png" width="750" alt="Conference list">
+</p>
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨  Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Role | Capabilities | Screenshot |
+|------|--------------|------------|
+| **Public / Guest** | Browse upcoming conferences, filter by status, view dates & descriptions. | — |
+| **Author** | Upload papers (PDF), track status (Submitted → In Review → Accepted / Rejected). | <img src="./screenshots/my_submissions.png" width="350"> |
+| **Reviewer** | Personal queue, download PDF, submit score, verdict & comments. | <img src="./screenshots/reviewer_submissions.png" width="350"> |
+| **Editor** | Create conferences, open/close CFP, assign reviewers, see aggregated reviews, set final decision. | <img src="./screenshots/submission_reviews.png" width="350"> |
+| **Admin** | Dashboard with KPIs (conferences, reviewers, editors, authors) and editor directory. | <img src="./screenshots/admin_dashboard.png" width="350"> |
 
-### `npm test`
+Additional screenshots live in `/public/screenshots/`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🏗  Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Layer | Technology |
+|-------|------------|
+| Front‑end | **React + Vite**, TypeScript, React‑Router |
+| Back‑end* | **Spring Boot 3** (Java 17), H2 in‑memory database |
+| Database | **H2** (in‑memory) |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+\* See the **backend repository** for API endpoints, data model and environment variables.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀  Getting Started (Front‑end)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Clone & bootstrap
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/your‑org/conference‑management-frontend.git
+cd conference‑management-frontend
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Install & run
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+npm run dev     # SPA on http://localhost:5173
+```
 
-## Learn More
+> **Tip**: Extract `conference_app_screenshots.zip` into `public/screenshots/`  
+> so the images in this README display correctly.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔗  Connecting to the API
 
-### Code Splitting
+The front‑end expects the back‑end to be running at:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+http://localhost:8080
+```
 
-### Analyzing the Bundle Size
+If you changed the server port or context path, update the proxy value in `vite.config.ts`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```ts
+// vite.config.ts
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  }
+});
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🧪  Testing
 
-### Advanced Configuration
+```bash
+npm run test    # Jest + React Testing Library
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🙌  Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Fork ➜ `git checkout -b feat/awesome`  
+2. Commit with **conventional commits**  
+3. `git push` & open a Pull Request
 
-### `npm run build` fails to minify
+Please update screenshots and documentation if the UI changes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
 
-        <div className="form-group">
-          <label>Rôle(s)</label>
-          <div className="roles-container">
-            {roleOptions.map((role) => (
-              <label key={role} className="role-label">
-                <input
-                  type="checkbox"
-                  value={role}
-                  checked={roles.includes(role)}
-                  onChange={handleRoleChange}
-                />
-                {role}
-              </label>
-            ))}
-          </div>
-          {errors.roles && (
-            <span id="rolesError" className="error-message">
-              {errors.roles}
-            </span>
-          )}
-        </div>
+## 📄  License
+
+Distributed under the **MIT License** – see [`LICENSE`](LICENSE) for details.
